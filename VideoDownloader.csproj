@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  VideoDownloader.csproj
+  C# WinForms 单文件 EXE，目标框架 net8.0-windows。
+  - OutputType=WinExe：输出 Windows 窗体程序，不弹控制台
+  - SunnyUI：现代化 WinForms 控件库（MIT）
+  - Microsoft.Web.WebView2：内嵌浏览器，用于 B 站扫码登录取 Cookie
+  交叉编译：Linux 上 EnableWindowsTargeting=true + -r win-x64
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>VideoDownloader</RootNamespace>
+    <AssemblyName>VideoDownloader</AssemblyName>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <NoWarn>CS0414;CS0649;CS1591;NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <!-- WebView2 用于 B 站登录页内嵌 -->
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2592.51" />
+  </ItemGroup>
+
+  <!-- 完整 playwright-stealth 反检测脚本（嵌入资源，运行时读取） -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\stealth.js" />
+  </ItemGroup>
+
+</Project>
